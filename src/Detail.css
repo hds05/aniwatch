@@ -1,0 +1,72 @@
+/* Container styling */
+.detail {
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    flex-wrap: wrap; /* Ensure responsiveness */
+    gap: 20px;
+}
+
+/* Image container */
+.detail1 {
+    flex: 1 1 45%; /* Allow flexibility and responsive resizing */
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+.detail1 img {
+    max-width: 100%; /* Ensure image scales down on smaller screens */
+    height: auto;
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+/* Text container */
+.detail2 {
+    flex: 1 1 45%; /* Allow flexibility and responsive resizing */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(173, 169, 169);
+}
+
+.detail2 h1 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.detail2 p {
+    line-height: 1.6;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+/* Loader container */
+.loader-container {
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .detail {
+        flex-direction: column; /* Stack content vertically */
+        align-items: center; /* Center content */
+    }
+
+    .detail1, .detail2 {
+        flex: 1 1 100%;
+        text-align: center; /* Center-align text and image for smaller screens */
+    }
+
+    .detail2 h1 {
+        font-size: 1.5rem; /* Smaller font for headers */
+    }
+
+    .detail2 p {
+        font-size: 0.9rem; /* Adjust paragraph size */
+    }
+}

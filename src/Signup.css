@@ -1,0 +1,129 @@
+/* General styles */
+.signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    /* background-color: #f5f5f5; */
+    padding: 20px;
+    background-image: url("https://wallpapers.com/images/hd/one-piece-manga-5439-x-2690-wallpaper-c8y7will7on37pxz.jpg");
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+}
+
+.signup-container {
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    padding: 25px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-header {
+    text-align: center;
+    padding: 30px;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 30px 30px 0 0;
+    margin-bottom: 10px;
+}
+
+.signup-form-group {
+    margin-bottom: 20px;
+}
+
+.signup-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.phone-input {
+    width: 100%;
+}
+
+.signup-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.signup-button {
+    width: 100%;
+    height: 60px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 10px 12px 3px rgb(163, 163, 163);
+    transition: background 0.3s, transform 0.2s;
+}
+
+.signup-button:hover {
+    background: #333;
+    transform: scale(1.02);
+}
+
+.signup-footer {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.signup-footer span {
+    color: blue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.signup-footer span:hover {
+    text-decoration: underline;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .signup-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .signup-header {
+        font-size: 1.2rem;
+        padding: 20px;
+    }
+
+    .signup-button {
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .signup-footer {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-header {
+        font-size: 1rem;
+    }
+
+    .signup-button {
+        height: 45px;
+        font-size: 0.9rem;
+    }
+
+    .signup-footer {
+        font-size: 0.7rem;
+    }
+}
