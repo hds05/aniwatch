@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useCallback } from 'react'
 import ReactStars from 'react-stars'
 import { Link } from 'react-router-dom'
 import { reviewRef, db } from './firebase/Firebase'
@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import { Appstate } from './App';
 
 export default function Review({ id, prevRating, userRated }) {
-    // const { user, isLoggedIn } = useContext(Appstate);
     const { user } = useContext(Appstate);
     const [rating, setRating] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -16,17 +15,23 @@ export default function Review({ id, prevRating, userRated }) {
     const [form, setForm] = useState("");
     const [data, setData] = useState([]);
 
-    const getData = async () => {
+    // Memoize getData to prevent recreation on every render
+    const getData = useCallback(async () => {
         setReviewLoading(true);
-        let quer = query(reviewRef, where('animeid', '==', id))
-        const querySnapshot = await getDocs(quer);
-        const reviews = [];
-        querySnapshot.forEach((doc) => {
-            reviews.push(doc.data());
-        });
-        setData(reviews);
-        setReviewLoading(false);
-    }
+        try {
+            let quer = query(reviewRef, where('animeid', '==', id));
+            const querySnapshot = await getDocs(quer);
+            const reviews = [];
+            querySnapshot.forEach((doc) => {
+                reviews.push(doc.data());
+            });
+            setData(reviews);
+        } catch (error) {
+            console.error("Error fetching reviews:", error);
+        } finally {
+            setReviewLoading(false);
+        }
+    }, [id]); // Only re-create if 'id' changes
 
     const sendReview = async () => {
         setLoading(true);
@@ -51,7 +56,7 @@ export default function Review({ id, prevRating, userRated }) {
                 buttons: false,
                 timer: 3000
             });
-            await getData(); // Fetch the latest reviews after adding a new review
+            await getData(); // Re-fetch reviews after submitting
         } catch (error) {
             Swal.fire({
                 title: error.message,
@@ -65,13 +70,13 @@ export default function Review({ id, prevRating, userRated }) {
 
     useEffect(() => {
         getData();
-    }, [id, getData]);
+    }, [id, getData]); // Trigger when 'id' or 'getData' changes
 
     const useAppstate = useContext(Appstate);
 
     return (
         <div className='review'>
-            {useAppstate.login ?
+            {useAppstate.login ? (
                 <>
                     <ReactStars
                         size={30}
@@ -88,39 +93,37 @@ export default function Review({ id, prevRating, userRated }) {
                     <button onClick={sendReview} style={{ display: 'flex', height: '50px', justifyContent: 'center', border: 'none', cursor: 'pointer', background: 'violet', width: '100%', padding: '15px 0px' }}>
                         {loading ? <Bars height={20} color='black' /> : <b>Share</b>}
                     </button>
-                    {
-                        reviewLoading ?
-                            <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'center' }}>
-                                <ThreeDots height={10} color='white' />
-                            </div>
-                            :
-                            <div className='reviewin'>
-                                {data.map((e, i) => (
-                                    <div className='reviewin1' key={i}>
-                                        <div style={{ display: "flex", alignItems: 'center' }}>
-                                            <p style={{ margin: '0px', color: 'white' }}>{e.name}</p>
-                                            <p style={{ margin: '0px', marginLeft: '10px', fontSize: '11px' }}>({new Date(e.timestamp).toLocaleString()})</p>
-                                        </div>
-                                        <ReactStars
-                                            size={13}
-                                            half={true}
-                                            value={e.rating}
-                                            edit={false}
-                                        />
-                                        {e.thought}
+                    {reviewLoading ? (
+                        <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'center' }}>
+                            <ThreeDots height={10} color='white' />
+                        </div>
+                    ) : (
+                        <div className='reviewin'>
+                            {data.map((e, i) => (
+                                <div className='reviewin1' key={i}>
+                                    <div style={{ display: "flex", alignItems: 'center' }}>
+                                        <p style={{ margin: '0px', color: 'white' }}>{e.name}</p>
+                                        <p style={{ margin: '0px', marginLeft: '10px', fontSize: '11px' }}>({new Date(e.timestamp).toLocaleString()})</p>
                                     </div>
-                                ))}
-                            </div>
-                    }
+                                    <ReactStars
+                                        size={13}
+                                        half={true}
+                                        value={e.rating}
+                                        edit={false}
+                                    />
+                                    {e.thought}
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </>
-                :
+            ) : (
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-                    <p><b>Please log in to share your thoughts....<Link style={{ color: 'violet' }} to={'/login'}>Login</Link></b></p>
+                    <p>
+                        <b>Please log in to share your thoughts....<Link style={{ color: 'violet' }} to={'/login'}>Login</Link></b>
+                    </p>
                 </div>
-            }
+            )}
         </div>
-    )
+    );
 }
-
-
-// src/Review.js
