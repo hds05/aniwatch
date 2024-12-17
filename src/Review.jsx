@@ -65,7 +65,7 @@ export default function Review({ id, prevRating, userRated }) {
 
     useEffect(() => {
         getData();
-    }, [ getData]);
+    }, [id, getData]);
 
     const useAppstate = useContext(Appstate);
 
