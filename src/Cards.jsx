@@ -4,12 +4,11 @@ import { CirclesWithBar } from 'react-loader-spinner';
 import { getDocs } from 'firebase/firestore';
 import { animeRef } from './firebase/Firebase';
 import { Link } from 'react-router-dom';
+import './App.css'
 
 
 export default function Cards() {
-    const [data, setData] = useState([
-       
-    ])
+    const [data, setData] = useState([])
 
     const [loading, setLoading] = useState(false)
 
@@ -34,7 +33,7 @@ export default function Cards() {
                     data.map((e, i) => {
                         return (
                             <Link to={`/detail/${e.id}`} style={{textDecoration:'none'}}>
-                                <div className='col-md-4  col-sm-6 image-card'>
+                                <div className='col-md-4  col-sm-4 image-card'>
                                     <img src={e.ImgURL} className='anime-image' alt="One Piece" />
                                     <div className='content'>
                                         <div >

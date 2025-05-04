@@ -43,7 +43,8 @@ export default function Detail() {
                     <div className="detail2">
                         <h1>{animedetail.AnimeName}</h1>
                         <ReactStars
-                            size={30}
+                            className='rating'
+                            // size={30}
                             half={true}
                             value={animedetail.rating / animedetail.rated}
                             edit={false}

@@ -4,27 +4,32 @@
     display: flex;
     flex-direction: row;
     color: white;
-    flex-wrap: wrap; /* Ensure responsiveness */
+    flex-wrap: wrap;
+    /* Ensure responsiveness */
     gap: 20px;
 }
 
 /* Image container */
 .detail1 {
-    flex: 1 1 45%; /* Allow flexibility and responsive resizing */
+    flex: 1 1 45%;
+    /* Allow flexibility and responsive resizing */
     display: flex;
     justify-content: flex-end;
     margin-right: 20px;
 }
 
 .detail1 img {
-    max-width: 100%; /* Ensure image scales down on smaller screens */
+    max-width: 100%;
+    /* Ensure image scales down on smaller screens */
     height: auto;
-    border-radius: 10px; /* Optional: Add rounded corners */
+    border-radius: 10px;
+    /* Optional: Add rounded corners */
 }
 
 /* Text container */
 .detail2 {
-    flex: 1 1 45%; /* Allow flexibility and responsive resizing */
+    flex: 1 1 45%;
+    /* Allow flexibility and responsive resizing */
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: rgb(173, 169, 169);
 }
@@ -41,6 +46,14 @@
     margin-top: 20px;
 }
 
+.rating svg {
+    width: 30px;
+    height: 30px;
+    fill: #FFD700;
+    /* Gold color for stars */
+    margin-right: 5px;
+}
+
 /* Loader container */
 .loader-container {
     width: 100%;
@@ -53,20 +66,65 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .detail {
-        flex-direction: column; /* Stack content vertically */
-        align-items: center; /* Center content */
+        flex-direction: column;
+        /* Stack content vertically */
+        align-items: center;
+        /* Center content */
     }
-
-    .detail1, .detail2 {
+    .rating {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2px;
+    }
+    
+    .detail1,
+    .detail2 {
         flex: 1 1 100%;
-        text-align: center; /* Center-align text and image for smaller screens */
+        text-align: center;
+        /* Center-align text and image for smaller screens */
     }
 
     .detail2 h1 {
-        font-size: 1.5rem; /* Smaller font for headers */
+        font-size: 1.5rem;
+        /* Smaller font for headers */
     }
 
     .detail2 p {
-        font-size: 0.9rem; /* Adjust paragraph size */
+        font-size: 0.9rem;
+        /* Adjust paragraph size */
+    }
+}
+
+@media (max-width: 425px) {
+    .detail {
+        flex-direction: column;
+        /* Stack content vertically */
+        align-items: center;
+        /* Center content */
+    }
+
+    .detail1,
+    .detail2 {
+        flex: 1 1 100%;
+        text-align: center;
+        /* Center-align text and image for smaller screens */
+    }
+
+    .detail2 h1 {
+        font-size: 1.1rem;
+        /* Smaller font for headers */
+        margin: 0.2px;
+    }
+
+    .rating svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .detail2 p {
+        font-size: 0.7rem;
+        /* Adjust paragraph size */
     }
 }

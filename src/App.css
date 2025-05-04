@@ -127,20 +127,25 @@ body {
 }
 
 .phone-input {
-  width: 100% !important; /* Ensure it takes the full width of the container */
-  box-sizing: border-box; /* Prevent overflow due to padding or borders */
+  width: 100% !important;
+  /* Ensure it takes the full width of the container */
+  box-sizing: border-box;
+  /* Prevent overflow due to padding or borders */
 }
 
 .phone-input input {
-  width: 100% !important; /* Input field will not exceed the parent width */
-  padding: 10px; /* Add consistent padding */
+  width: 100% !important;
+  /* Input field will not exceed the parent width */
+  padding: 10px;
+  /* Add consistent padding */
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 .phone-input .flag-dropdown {
-  border-radius: 5px 0 0 5px; /* Match the input border radius */
+  border-radius: 5px 0 0 5px;
+  /* Match the input border radius */
   overflow: hidden;
 }
 
@@ -160,15 +165,44 @@ body {
 @media screen and (max-width: 425px) {
   .maincontent {
     padding: 5px;
+    gap: 5px;
     /* display: flex;
     justify-content: center; */
   }
+  .image-card {
+    flex: 0 1 100px;
+    /* Adjust the flex-basis for smaller screens */
+    margin-bottom: 10px;
+    /* Reduce margin for smaller screens */
+  }
+
+
   .phone-input input {
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
-    padding: 8px; /* Reduce padding for smaller screens */
+    font-size: 0.9rem;
+    /* Adjust font size for smaller screens */
+    padding: 8px;
+    /* Reduce padding for smaller screens */
+  }
+
+  .phone-input .flag-dropdown {
+    height: 100%;
+    /* Ensure it aligns with the input field */
+  }
 }
 
-.phone-input .flag-dropdown {
-    height: 100%; /* Ensure it aligns with the input field */
-}
+@media screen and (max-width: 376px) {
+  .maincontent {
+    padding: 5px;
+    gap: 0.1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .phone-input input {
+    font-size: 0.8rem;
+    /* Adjust font size for smaller screens */
+    padding: 6px;
+    /* Reduce padding for smaller screens */
+  }
 }
